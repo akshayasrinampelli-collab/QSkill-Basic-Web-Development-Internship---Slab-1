@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aether | Premium Glassmorphic Portal</title>
+  <!-- Google Fonts - Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Canvas for interactive background particles -->
+  <canvas id="particle-canvas" aria-hidden="true"></canvas>
+
+  <!-- Animated background ambient glowing blobs -->
+  <div class="blob blob-purple" aria-hidden="true"></div>
+  <div class="blob blob-cyan" aria-hidden="true"></div>
+
+  <!-- Main layout container -->
+  <div class="login-wrapper">
+    <main class="login-card" id="login-card">
+      
+      <!-- Brand Logo / Header -->
+      <div class="card-header">
+        <div class="brand-logo" aria-hidden="true">
+          <!-- Premium Abstract SVG Logo -->
+          <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="var(--accent-purple)" />
+                <stop offset="100%" stop-color="var(--accent-cyan)" />
+              </linearGradient>
+            </defs>
+            <circle cx="50" cy="50" r="35" stroke="url(#logo-grad)" stroke-width="8" stroke-dasharray="160 50" />
+            <polygon points="50,32 65,58 35,58" fill="url(#logo-grad)" />
+          </svg>
+        </div>
+        <h1 class="brand-name">Aether</h1>
+        <p class="brand-tagline">Access your spatial workspace</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="login-form" novalidate>
+        
+        <!-- Email or Username Field Group -->
+        <div class="input-group">
+          <div class="input-container">
+            <!-- Username/Email Icon -->
+            <span class="input-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </span>
+            <input 
+              type="text" 
+              id="username" 
+              name="username" 
+              placeholder=" " 
+              required
+              autocomplete="username"
+              aria-describedby="username-error"
+              aria-invalid="false"
+            >
+            <label for="username">Email or Username</label>
+          </div>
+          <!-- Validation Message -->
+          <div class="validation-message" id="username-error" role="alert" aria-live="polite"></div>
+        </div>
+
+        <!-- Password Field Group -->
+        <div class="input-group">
+          <div class="input-container">
+            <!-- Lock Icon -->
+            <span class="input-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </span>
+            <input 
+              type="password" 
+              id="password" 
+              name="password" 
+              placeholder=" " 
+              required
+              autocomplete="current-password"
+              aria-describedby="password-error"
+              aria-invalid="false"
+            >
+            <label for="password">Password</label>
+            
+            <!-- Toggle password view -->
+            <button type="button" id="password-toggle" class="password-toggle" aria-label="Show password">
+              <!-- Eye Close / Open SVG Icons -->
+              <svg class="eye-icon-show" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg class="eye-icon-hide hidden" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+          </div>
+          <!-- Validation Message -->
+          <div class="validation-message" id="password-error" role="alert" aria-live="polite"></div>
+        </div>
+
+        <!-- Remember Me and Forgot Password Group -->
+        <div class="form-actions">
+          <label class="remember-me">
+            <input type="checkbox" id="remember-me" name="remember-me">
+            <span class="checkmark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </span>
+            <span class="label-text">Remember me</span>
+          </label>
+          <a href="#" class="forgot-link">Forgot Password?</a>
+        </div>
+
+        <!-- Login Button -->
+        <button type="submit" id="submit-btn" class="submit-btn">
+          <span class="btn-text">Sign In</span>
+          <span class="btn-spinner hidden" aria-hidden="true">
+            <svg viewBox="0 0 50 50" class="spinner">
+              <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+            </svg>
+          </span>
+        </button>
+
+      </form>
+      
+      <!-- Card Footer -->
+      <footer class="card-footer">
+        <p>Don't have an account? <a href="#" class="signup-link">Create Account</a></p>
+      </footer>
+
+    </main>
+  </div>
+
+  <!-- JavaScript Behavior -->
+  <script src="script.js"></script>
+</body>
+</html>
